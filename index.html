@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iim - input faster.</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <textarea></textarea>
+    <button>Delete this (Del)</button>
+    <button>New text (Alt+N)</button>
+    <button onclick="addPanel();">Add a keyboard (Alt+A)</button>
+    <button>Edit this keyboard (Alt+E)</button>
+    <button>Done (Enter)</button>
+    <div id="addKeyboard">
+        <label>
+            Name the keyboard:
+            <input type="text" id="name" />
+        </label>
+        <button>Done (Enter)</button>
+        <button>Cancel (Esc)</button>
+    </div>
+    <div id="keyboard">
+        <div class="line">
+            <div class="key">
+                <span class="top left">~</span>
+                <span class="bottom left">`</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','`',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','`',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">!</span>
+                <span class="bottom left">1</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','1',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','1',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">@</span>
+                <span class="bottom left">2</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','2',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','2',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">#</span>
+                <span class="bottom left">3</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','3',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','3',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">$</span>
+                <span class="bottom left">4</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','4',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','4',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">%</span>
+                <span class="bottom left">5</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','5',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','5',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">^</span>
+                <span class="bottom left">6</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','6',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','6',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">&</span>
+                <span class="bottom left">7</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','7',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','7',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">*</span>
+                <span class="bottom left">8</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','8',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','8',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">(</span>
+                <span class="bottom left">9</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','9',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','9',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">)</span>
+                <span class="bottom left">0</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','0',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','0',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">_</span>
+                <span class="bottom left">-</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','-',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','-',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">+</span>
+                <span class="bottom left">=</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','=',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','=',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">|</span>
+                <span class="bottom left">\</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','\\',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','\\',this.value);" />
+            </div>
+        </div>
+        <div class="line">
+            <div class="key">
+                <span class="top left">Q</span>
+                <span class="bottom left">q</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','Q',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','Q',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">W</span>
+                <span class="bottom left">w</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','W',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','W',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">E</span>
+                <span class="bottom left">e</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','E',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','E',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">R</span>
+                <span class="bottom left">r</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','R',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','R',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">T</span>
+                <span class="bottom left">t</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','T',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','T',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">Y</span>
+                <span class="bottom left">y</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','Y',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','Y',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">U</span>
+                <span class="bottom left">u</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','U',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','U',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">I</span>
+                <span class="bottom left">i</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','I',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','I',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">O</span>
+                <span class="bottom left">o</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','O',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','O',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">P</span>
+                <span class="bottom left">p</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','P',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','P',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">{</span>
+                <span class="bottom left">[</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','[',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','[',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">}</span>
+                <span class="bottom left">]</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift',']',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal',']',this.value);" />
+            </div>
+        </div>
+        <div class="line">
+            <div class="key">
+                <span class="top left">A</span>
+                <span class="bottom left">a</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','A',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','A',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">S</span>
+                <span class="bottom left">s</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','S',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','S',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">D</span>
+                <span class="bottom left">d</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','D',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','D',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">F</span>
+                <span class="bottom left">f</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','F',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','F',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">G</span>
+                <span class="bottom left">g</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','G',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','G',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">H</span>
+                <span class="bottom left">h</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','H',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','H',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">J</span>
+                <span class="bottom left">j</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','J',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','J',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">K</span>
+                <span class="bottom left">k</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','K',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','K',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">L</span>
+                <span class="bottom left">l</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','L',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','L',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">:</span>
+                <span class="bottom left">;</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift',';',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal',';',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">"</span>
+                <span class="bottom left">'</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift',`'`,this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal',`'`,this.value);" />
+            </div>
+        </div>
+        <div class="line">
+            <div class="key">
+                <span class="top left">Z</span>
+                <span class="bottom left">z</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','Z',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','Z',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">X</span>
+                <span class="bottom left">x</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','X',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','X',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">C</span>
+                <span class="bottom left">c</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','C',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','C',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">V</span>
+                <span class="bottom left">v</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','V',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','V',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">B</span>
+                <span class="bottom left">b</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','B',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','B',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">N</span>
+                <span class="bottom left">n</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','N',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','N',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">M</span>
+                <span class="bottom left">m</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','M',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','M',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">&lt;</span>
+                <span class="bottom left">,</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift',',',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal',',',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">&gt;</span>
+                <span class="bottom left">.</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','.',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','.',this.value);" />
+            </div>
+            <div class="key">
+                <span class="top left">?</span>
+                <span class="bottom left">/</span>
+                <input type="text" class="top right" placeholder="_" maxlength="1" onchange="editKeyboard('shift','/',this.value);" />
+                <input type="text" class="bottom right" placeholder="_" maxlength="1" onchange="editKeyboard('normal','/',this.value);" />
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
