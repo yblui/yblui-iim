@@ -210,7 +210,7 @@ function addKeyboard(name) {
     quitPanel();
 }
 function setCookie(name, value) {
-    document.cookie = name + "=" + JSON.stringify(value) + "; expires=Sat, 31 Dec 2050 12:00:00 GMT"
+    document.cookie = name + "=" + JSON.stringify(value).replace(/\;/g,"@f@").replace(/\=/g,"@d@") + "; expires=Sat, 31 Dec 2050 12:00:00 GMT"
 }
 
 function getCookie(name) {
@@ -218,7 +218,7 @@ function getCookie(name) {
     for (let b of a) {
         b = b.split("=");
         if (b[0].trim() == name) {
-            return JSON.parse(b[1]);
+            return JSON.parse(b[1].replace(/\@f\@/g,";").replace(/\@d\@/g,"="));
         }
     }
     return null;
@@ -231,7 +231,7 @@ function nextKeyboard() {
                 k.getElementsByClassName("right")[0].value = keyboards[(i + 1) % (keyboards.length)].shift[k.getElementsByClassName("left")[1].innerText.toUpperCase()];
                 k.getElementsByClassName("right")[1].value = keyboards[(i + 1) % (keyboards.length)].normal[k.getElementsByClassName("left")[1].innerText.toUpperCase()];
             }
-            document.getElementById("rules").innerHTML = ""
+            document.getElementById("rules").innerHTML = "";
             for (let b of keyboards[(i + 1) % (keyboards.length)].special) {
                 document.getElementById("rules").innerHTML += ("<div><strong>" + b.before + "</strong> -> " + b.after + "<button onclick='deleteRule(`" + b.before + "`,this.parentNode);'>Delete this rule</button></div>");
             }
@@ -250,10 +250,20 @@ function editKeyboard(type, key, value) {
 }
 function deleteKeyboard() {
     if (keyboards.length > 1) {
+        for(let i=0;i<keyboards.length;i++) {
+            if(keyboards[i].name==currentKeyboard) {
+                keyboards.splice(i, 1);
+                break;
+            }
+        }
         currentKeyboard = keyboards[0].name;
         for (let k of document.getElementsByClassName("key")) {
             k.getElementsByClassName("right")[0].value = keyboards[0].shift[k.getElementsByClassName("left")[1].innerText.toUpperCase()];
             k.getElementsByClassName("right")[1].value = keyboards[0].normal[k.getElementsByClassName("left")[1].innerText.toUpperCase()];
+        }
+        document.getElementById("rules").innerHTML = "";
+        for (let b of keyboards[0].special) {
+            document.getElementById("rules").innerHTML += ("<div><strong>" + b.before + "</strong> -> " + b.after + "<button onclick='deleteRule(`" + b.before + "`,this.parentNode);'>Delete this rule</button></div>");
         }
     }
 }
