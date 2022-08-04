@@ -103,6 +103,14 @@ let keyboards = (getCookie("kbd")) ? getCookie("kbd") : [
     }
 ]
 let currentKeyboard = keyboards[0].name;
+for (let c of document.getElementsByClassName("key")) {
+    c.getElementsByClassName("right")[0].value = keyboards[0].shift[c.getElementsByClassName("left")[1].innerText.toUpperCase()];
+    c.getElementsByClassName("right")[1].value = keyboards[0].normal[c.getElementsByClassName("left")[1].innerText.toUpperCase()];
+}
+document.getElementById("rules").innerHTML = "";
+for (let ii of keyboards[0].special) {
+    document.getElementById("rules").innerHTML += ("<div><strong>" + ii.before + "</strong> -> " + ii.after + "<button onclick='deleteRule(`" + ii.before + "`,this.parentNode);'>Delete this rule</button></div>");
+}
 
 function addKeyboard(name) {
     keyboards[keyboards.length] = {
@@ -210,7 +218,7 @@ function addKeyboard(name) {
     quitPanel();
 }
 function setCookie(name, value) {
-    document.cookie = name + "=" + JSON.stringify(value).replace(/\;/g,"@f@").replace(/\=/g,"@d@") + "; expires=Sat, 31 Dec 2050 12:00:00 GMT"
+    document.cookie = name + "=" + JSON.stringify(value).replace(/\;\"\:/g,"@f@\":").replace(/\=\"\:/g,"@d@\":") + "; expires=Sat, 31 Dec 2050 12:00:00 GMT"
 }
 
 function getCookie(name) {
@@ -218,7 +226,7 @@ function getCookie(name) {
     for (let b of a) {
         b = b.split("=");
         if (b[0].trim() == name) {
-            return JSON.parse(b[1].replace(/\@f\@/g,";").replace(/\@d\@/g,"="));
+            return JSON.parse(b[1].replace(/\@f\@\"\:/g,";\":").replace(/\@d\@\"\:/g,"=\":"));
         }
     }
     return null;
