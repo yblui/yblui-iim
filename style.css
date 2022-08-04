@@ -86,19 +86,48 @@ body {
 button {
     border: solid 3px lightgray;
     background-color: white;
-    color:lightgray;
+    color: lightgray;
     font-weight: bold;
     padding: 10px;
 }
 
-button:hover,button.highlight {
+button:hover,
+button.highlight {
     border-color: black;
-    color:black;
+    color: black;
     cursor: pointer;
 }
 
 *,
 button,
 input {
-    font-family: Verdana,sans-serif;
+    font-family: Verdana, sans-serif;
+}
+
+textarea {
+    vertical-align: bottom;
+}
+
+#keyboards {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#special {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: calc(100% - 412px);
+    overflow: auto;
+}
+
+#container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: calc(100% - 412px);
+    overflow: auto;
 }
