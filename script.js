@@ -216,9 +216,10 @@ function addKeyboard(name) {
         "special": []
     }
     quitPanel();
+    document.getElementById("keyboards").innerHTML += "<button onclick='switchKeyboard(this.innerText);'>" + name + "</button>";
 }
 function setCookie(name, value) {
-    document.cookie = name + "=" + JSON.stringify(value).replace(/\;\"\:/g,"@f@\":").replace(/\=\"\:/g,"@d@\":") + "; expires=Sat, 31 Dec 2050 12:00:00 GMT"
+    document.cookie = name + "=" + JSON.stringify(value).replace(/\;\"\:/g, "@f@\":").replace(/\=\"\:/g, "@d@\":") + "; expires=Sat, 31 Dec 2050 12:00:00 GMT"
 }
 
 function getCookie(name) {
@@ -226,7 +227,7 @@ function getCookie(name) {
     for (let b of a) {
         b = b.split("=");
         if (b[0].trim() == name) {
-            return JSON.parse(b[1].replace(/\@f\@\"\:/g,";\":").replace(/\@d\@\"\:/g,"=\":"));
+            return JSON.parse(b[1].replace(/\@f\@\"\:/g, ";\":").replace(/\@d\@\"\:/g, "=\":"));
         }
     }
     return null;
@@ -243,6 +244,10 @@ function nextKeyboard() {
             for (let b of keyboards[(i + 1) % (keyboards.length)].special) {
                 document.getElementById("rules").innerHTML += ("<div><strong>" + b.before + "</strong> -> " + b.after + "<button onclick='deleteRule(`" + b.before + "`,this.parentNode);'>Delete this rule</button></div>");
             }
+            for (let y of document.querySelectorAll("#keyboards button")) {
+                y.classList.remove("highlight");
+            }
+            document.querySelectorAll("#keyboards button")[(i + 1) % (keyboards.length)].classList.add("highlight");
             break;
         }
     }
@@ -258,8 +263,8 @@ function editKeyboard(type, key, value) {
 }
 function deleteKeyboard() {
     if (keyboards.length > 1) {
-        for(let i=0;i<keyboards.length;i++) {
-            if(keyboards[i].name==currentKeyboard) {
+        for (let i = 0; i < keyboards.length; i++) {
+            if (keyboards[i].name == currentKeyboard) {
                 keyboards.splice(i, 1);
                 break;
             }
@@ -273,6 +278,10 @@ function deleteKeyboard() {
         for (let b of keyboards[0].special) {
             document.getElementById("rules").innerHTML += ("<div><strong>" + b.before + "</strong> -> " + b.after + "<button onclick='deleteRule(`" + b.before + "`,this.parentNode);'>Delete this rule</button></div>");
         }
+        for (let y of document.querySelectorAll("#keyboards button")) {
+            y.classList.remove("highlight");
+        }
+        document.querySelectorAll("#keyboards button")[0].classList.add("highlight");
     }
 }
 function editOn() {
@@ -378,4 +387,29 @@ function newText() {
 
 function deleteText(node) {
     node.parentNode.removeChild(node);
+}
+
+function switchKeyboard(name) {
+    currentKeyboard = name;
+    for (let i of keyboards) {
+        if (i.name == name) {
+            for (let k of document.getElementsByClassName("key")) {
+                k.getElementsByClassName("right")[0].value = i.shift[k.getElementsByClassName("left")[1].innerText.toUpperCase()];
+                k.getElementsByClassName("right")[1].value = i.normal[k.getElementsByClassName("left")[1].innerText.toUpperCase()];
+            }
+            document.getElementById("rules").innerHTML = "";
+            for (let b of i.special) {
+                document.getElementById("rules").innerHTML += ("<div><strong>" + b.before + "</strong> -> " + b.after + "<button onclick='deleteRule(`" + b.before + "`,this.parentNode);'>Delete this rule</button></div>");
+            }
+            break;
+        }
+    }
+    for (let y of document.querySelectorAll("#keyboards button")) {
+        y.classList.remove("highlight");
+        if (y.innerText == name) y.classList.add("highlight");
+    }
+}
+
+function shortcut(key) {
+
 }

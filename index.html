@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" onkeydown="shortcut(event);">
 
 <head>
     <meta charset="UTF-8">
@@ -424,7 +424,7 @@
     <button onclick="addRule(document.getElementById('rule1').value,document.getElementById('rule2').value);">+ Add
         (Alt+=)</button>
     <div id="keyboards">
-        <button class="highlight">Default keyboard</button>
+        <button class="highlight" onclick="switchKeyboard(this.innerText);">Default Keyboard</button>
     </div>
     <script src="script.js"></script>
 </body>
