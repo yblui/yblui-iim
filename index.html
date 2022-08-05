@@ -13,7 +13,7 @@
     <div id="container">
         <div>
             <textarea onkeypress="input(event,this);"></textarea>
-            <button onclick="deleteText(this.parentNode);">Delete this (Del)</button>
+            <button onclick="deleteText(this.parentNode);">Delete this</button>
         </div>
     </div>
     <div id="addKeyboard">
@@ -21,15 +21,16 @@
             Name the keyboard:
             <input type="text" id="name" />
         </label>
+        <br />
         <button onclick="addKeyboard(document.getElementById('name').value);">Done (Enter)</button>
         <button onclick="quitPanel();">Cancel (Esc)</button>
     </div>
     <div id="special">
         <strong>Special rules:</strong>
         <div id="rules"></div>
-        <input type="text" id="rule1" onkeypress="input(event,this);" />
+        <input type="text" id="rule1" onkeypress="input(event,this);" placeholder="Before"/>
         ->
-        <input type="text" id="rule2" />
+        <input type="text" id="rule2" placeholder="After" />
         <button onclick="addRule(document.getElementById('rule1').value,document.getElementById('rule2').value);">+ Add
             (Alt+=)</button>
     </div>

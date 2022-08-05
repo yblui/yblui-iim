@@ -111,7 +111,10 @@ document.getElementById("rules").innerHTML = "";
 for (let ii of keyboards[0].special) {
     document.getElementById("rules").innerHTML += ("<div><strong>" + ii.before + "</strong> -> " + ii.after + "<button onclick='deleteRule(`" + ii.before + "`,this.parentNode);'>Delete this rule</button></div>");
 }
-
+for (let h of document.querySelectorAll("#keyboards button.toggle")) {
+    h.classList.remove("highlight");
+    if (h.innerText == currentKeyboard) h.classList.add("highlight");
+}
 function addKeyboard(name) {
     keyboards[keyboards.length] = {
         "name": name,
@@ -383,7 +386,7 @@ function input(e, text) {
 }
 
 function newText() {
-    document.getElementById("container").innerHTML += '<div><textarea onkeypress="input(event,this);"></textarea><button onclick="deleteText(this.parentNode);">Delete this (Del)</button></div>';
+    document.getElementById("container").innerHTML += '<div><textarea onkeypress="input(event,this);"></textarea><button onclick="deleteText(this.parentNode);">Delete this</button></div>';
 }
 
 function deleteText(node) {
@@ -424,8 +427,11 @@ function shortcut(key) {
     } else if (key.key.toUpperCase() == "E" && key.altKey) {
         editOn();
         key.preventDefault();
-    } else if (key.key == "Del" && key.altKey) {
+    } else if (key.key == "Delete" && key.altKey) {
         deleteKeyboard();
+        key.preventDefault();
+    } else if (key.key == "=" && key.altKey) {
+        addRule(document.getElementById('rule1').value, document.getElementById('rule2').value);
         key.preventDefault();
     }
 }
