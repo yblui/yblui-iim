@@ -111,9 +111,9 @@ document.getElementById("rules").innerHTML = "";
 for (let ii of keyboards[0].special) {
     document.getElementById("rules").innerHTML += ("<div><strong>" + ii.before + "</strong> -> " + ii.after + "<button onclick='deleteRule(`" + ii.before + "`,this.parentNode);'>Delete this rule</button></div>");
 }
-for (let h of document.querySelectorAll("#keyboards button.toggle")) {
-    h.classList.remove("highlight");
-    if (h.innerText == currentKeyboard) h.classList.add("highlight");
+for (let h of keyboards) {
+    if (h.name == currentKeyboard) document.getElementById("keyboards").innerHTML += ('<button class="toggle highlight" onclick="switchKeyboard(this.innerText);">' + h.name + '</button>');
+    else document.getElementById("keyboards").innerHTML += ('<button class="toggle" onclick="switchKeyboard(this.innerText);">' + h.name + '</button>');
 }
 function addKeyboard(name) {
     keyboards[keyboards.length] = {
@@ -421,9 +421,6 @@ function shortcut(key) {
     } else if (key.key.toUpperCase() == "A" && key.altKey) {
         addPanel();
         key.preventDefault();
-    } else if (key.key == "Alt") {
-        nextKeyboard();
-        key.preventDefault();
     } else if (key.key.toUpperCase() == "E" && key.altKey) {
         editOn();
         key.preventDefault();
@@ -433,5 +430,12 @@ function shortcut(key) {
     } else if (key.key == "=" && key.altKey) {
         addRule(document.getElementById('rule1').value, document.getElementById('rule2').value);
         key.preventDefault();
+    } else if (key.key == "Alt") {
+        nextKeyboard();
+        key.preventDefault();
+    } else if (key.key == "Enter" && document.getElementById("addKeyboard").style.display == "block") {
+        addKeyboard(document.getElementById('name').value);
+    } else if (key.key == "Esc") {
+        quitPanel();
     }
 }

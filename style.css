@@ -108,12 +108,13 @@ textarea {
     vertical-align: bottom;
     resize: none;
     width: calc(100% - 27px);
-    height:150px;
+    height: 150px;
     border-width: 0 0 0 3px;
     border-color: lightgray;
 }
-textarea:focus{
-    outline:solid 3px black;
+
+textarea:focus {
+    outline: solid 3px black;
 }
 
 #keyboards {
@@ -142,14 +143,19 @@ textarea:focus{
     padding: 10px;
 }
 
-#rules button{
-    border:none;
+#rules button {
+    border: none;
 }
 
-#special input{
-    border:none;
+#special input,
+#addKeyboard input {
+    border: none;
 }
 
-#special input:first-of-type{
+#special input:first-of-type {
     text-align: right;
+}
+
+h2 {
+    text-align: center;
 }
