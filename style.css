@@ -159,3 +159,7 @@ textarea:focus {
 h2 {
     text-align: center;
 }
+
+#done{
+    display: none;
+}

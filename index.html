@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" onkeyup="shortcut(event);">
+<html lang="en" onkeydown="shortcut(event);">
 
 <head>
     <meta charset="UTF-8" />
@@ -424,12 +424,11 @@
         </div>
         <button onclick="newText();">New text (Alt+N)</button>
         <button onclick="addPanel();">Add a keyboard (Alt+A)</button>
-        <button onclick="nextKeyboard();">Next keyboard (Alt)</button>
-        <button onclick="editOn();">Edit this keyboard (Alt+E)</button>
-        <button onclick="editOff();">Done (Enter)</button>
+        <button onclick="nextKeyboard();">Next keyboard (Tab)</button>
+        <button onclick="editOn();" id="edit">Edit this keyboard (Alt+I)</button>
+        <button onclick="editOff();" id="done">Done (Enter)</button>
         <button onclick="deleteKeyboard();">Delete this keyboard (Alt+Del)</button>
         <br />
-        <button class="toggle highlight" onclick="switchKeyboard(this.innerText);">Default Keyboard</button>
     </div>
     <script src="script.js"></script>
 </body>

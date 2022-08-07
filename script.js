@@ -269,6 +269,7 @@ function deleteKeyboard() {
         for (let i = 0; i < keyboards.length; i++) {
             if (keyboards[i].name == currentKeyboard) {
                 keyboards.splice(i, 1);
+                document.querySelectorAll("#keyboards button.toggle")[i].parentNode.removeChild(document.querySelectorAll("#keyboards button.toggle")[i]);
                 break;
             }
         }
@@ -281,9 +282,6 @@ function deleteKeyboard() {
         for (let b of keyboards[0].special) {
             document.getElementById("rules").innerHTML += ("<div><strong>" + b.before + "</strong> -> " + b.after + "<button onclick='deleteRule(`" + b.before + "`,this.parentNode);'>Delete this rule</button></div>");
         }
-        for (let y of document.querySelectorAll("#keyboards button.toggle")) {
-            y.classList.remove("highlight");
-        }
         document.querySelectorAll("#keyboards button.toggle")[0].classList.add("highlight");
     }
 }
@@ -291,11 +289,15 @@ function editOn() {
     for (let i of document.querySelectorAll("#keyboard input")) {
         i.disabled = false;
     }
+    document.getElementById("done").style.display = "inline-block";
+    document.getElementById("edit").style.display = "none";
 }
 function editOff() {
     for (let i of document.querySelectorAll("#keyboard input")) {
         i.disabled = true;
     }
+    document.getElementById("done").style.display = "none";
+    document.getElementById("edit").style.display = "inline-block";
 }
 function addPanel() {
     document.getElementById("addKeyboard").style.display = "block";
@@ -414,28 +416,24 @@ function switchKeyboard(name) {
     }
 }
 
-function shortcut(key) {
-    if (key.key.toUpperCase() == "N" && key.altKey) {
+function shortcut(e) {
+    if (e.key.toUpperCase() == "N" && e.altKey) {
         newText();
-        key.preventDefault();
-    } else if (key.key.toUpperCase() == "A" && key.altKey) {
+    } else if (e.key.toUpperCase() == "A" && e.altKey) {
         addPanel();
-        key.preventDefault();
-    } else if (key.key.toUpperCase() == "E" && key.altKey) {
+    } else if (e.key.toUpperCase() == "I" && e.altKey) {
         editOn();
-        key.preventDefault();
-    } else if (key.key == "Delete" && key.altKey) {
+    } else if (e.key == "Delete" && e.altKey) {
         deleteKeyboard();
-        key.preventDefault();
-    } else if (key.key == "=" && key.altKey) {
+    } else if (e.key == "=" && e.altKey) {
         addRule(document.getElementById('rule1').value, document.getElementById('rule2').value);
-        key.preventDefault();
-    } else if (key.key == "Alt") {
+    } else if (e.key == "Tab") {
+        e.preventDefault();
         nextKeyboard();
-        key.preventDefault();
-    } else if (key.key == "Enter" && document.getElementById("addKeyboard").style.display == "block") {
+    } else if (e.key == "Enter" && document.getElementById("addKeyboard").style.display == "block") {
         addKeyboard(document.getElementById('name').value);
-    } else if (key.key == "Esc") {
+        editOff();
+    } else if (e.key == "Escape") {
         quitPanel();
     }
 }
