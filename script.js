@@ -103,10 +103,6 @@ let keyboards = (getCookie("kbd")) ? getCookie("kbd") : [
     }
 ]
 let currentKeyboard = keyboards[0].name;
-for (let c of document.getElementsByClassName("key")) {
-    c.getElementsByClassName("right")[0].value = keyboards[0].shift[c.getElementsByClassName("left")[1].innerText.toUpperCase()];
-    c.getElementsByClassName("right")[1].value = keyboards[0].normal[c.getElementsByClassName("left")[1].innerText.toUpperCase()];
-}
 document.getElementById("rules").innerHTML = "";
 for (let ii of keyboards[0].special) {
     document.getElementById("rules").innerHTML += ("<div><strong>" + ii.before + "</strong> -> " + ii.after + "<button onclick='deleteRule(`" + ii.before + "`,this.parentNode);'>Delete this rule</button></div>");
@@ -114,6 +110,10 @@ for (let ii of keyboards[0].special) {
 for (let h of keyboards) {
     if (h.name == currentKeyboard) document.getElementById("keyboards").innerHTML += ('<button class="toggle highlight" onclick="switchKeyboard(this.innerText);">' + h.name + '</button>');
     else document.getElementById("keyboards").innerHTML += ('<button class="toggle" onclick="switchKeyboard(this.innerText);">' + h.name + '</button>');
+}
+for (let c of document.getElementsByClassName("key")) {
+    c.getElementsByClassName("right")[0].value = keyboards[0].shift[c.getElementsByClassName("left")[1].innerText.toUpperCase()];
+    c.getElementsByClassName("right")[1].value = keyboards[0].normal[c.getElementsByClassName("left")[1].innerText.toUpperCase()];
 }
 function addKeyboard(name) {
     keyboards[keyboards.length] = {
@@ -432,6 +432,8 @@ function shortcut(e) {
         nextKeyboard();
     } else if (e.key == "Enter" && document.getElementById("addKeyboard").style.display == "block") {
         addKeyboard(document.getElementById('name').value);
+        editOff();
+    } else if (e.key == "Enter") {
         editOff();
     } else if (e.key == "Escape") {
         quitPanel();

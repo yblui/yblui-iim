@@ -127,7 +127,7 @@ textarea:focus {
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%;
+    width: calc(50% - 20px);
     height: calc(100% - 412px);
     overflow: auto;
     padding: 10px;
